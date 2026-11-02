@@ -42,6 +42,11 @@ jobs:
           # informational: style warnings should not block a merge
           shellcheck -S error scripts/*.sh || true
 
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
       - uses: nf-core/setup-nextflow@v2
 
       - name: Nextflow config and syntax
@@ -67,6 +72,11 @@ jobs:
       NXF_VER: ${{ matrix.nxf_ver }}
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
 
       - uses: nf-core/setup-nextflow@v2
         with:
@@ -96,7 +106,7 @@ jobs:
       - name: Verify containers have the modules the scripts import
         if: matrix.profile == 'docker'
         run: |
-          docker run --rm quay.io/biocontainers/treetime:0.11.4--pyh7cba7a3_0 \
+          docker run --rm quay.io/biocontainers/treetime:0.12.1--pyhdfd78af_0 \
             python -c "import pandas, numpy, Bio; print('pandas', pandas.__version__, '| biopython', Bio.__version__)"
 
       - name: Run the test profile (docker)

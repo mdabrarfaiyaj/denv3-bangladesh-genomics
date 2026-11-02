@@ -1,0 +1,6 @@
+# .pml here is PyMOL, not Promela (GitHub Linguist maps the extension to
+# Promela by default and reports a language this project does not use).
+*.pml linguist-detectable=false
+
+# results/ holds generated output, not source; keep it out of the language bar
+results/** linguist-generated=true

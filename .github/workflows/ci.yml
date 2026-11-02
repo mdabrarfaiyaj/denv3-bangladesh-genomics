@@ -111,6 +111,18 @@ jobs:
       - name: Verify containers have the modules the scripts import
         if: matrix.profile == 'docker'
         run: |
+          # Every image the docker profile references. A tag that does
+          # not exist should fail here in seconds, not mid-pipeline.
+          IMAGES=(
+            quay.io/biocontainers/nextclade:3.8.2--h9ee0642_0
+            quay.io/biocontainers/iqtree:3.1.4--h8471819_0
+            quay.io/biocontainers/treetime:0.12.1--pyhdfd78af_0
+          )
+          for img in "${IMAGES[@]}"; do
+            echo "pulling $img"
+            docker pull -q "$img"
+          done
+          # the Python processes all need pandas; several need Biopython
           docker run --rm quay.io/biocontainers/treetime:0.12.1--pyhdfd78af_0 \
             python -c "import pandas, numpy, Bio; print('pandas', pandas.__version__, '| biopython', Bio.__version__)"
 

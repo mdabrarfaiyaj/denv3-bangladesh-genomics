@@ -97,6 +97,11 @@ jobs:
         shell: bash -el {0}
         run: |
           echo "reusing environment: $CONDA_PREFIX"
+          # environment.yml installs nextflow, whose conda package
+          # brings its own JDK and shadows the pinned Java 17.
+          export JAVA_HOME="$JAVA_HOME_17_X64"
+          export PATH="$JAVA_HOME/bin:$PATH"
+          java -version
           nextflow run . \
             -profile test,conda \
             --conda_env "$CONDA_PREFIX" \

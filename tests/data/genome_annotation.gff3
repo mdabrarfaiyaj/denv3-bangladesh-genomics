@@ -1,0 +1,12 @@
+##gff-version 3
+ref	feature	gene	95	436	.	+	.	gene_name=C
+ref	feature	gene	437	934	.	+	.	gene_name=prM
+ref	feature	gene	935	2413	.	+	.	gene_name=E
+ref	feature	gene	2414	3469	.	+	.	gene_name=NS1
+ref	feature	gene	3470	4123	.	+	.	gene_name=NS2A
+ref	feature	gene	4124	4513	.	+	.	gene_name=NS2B
+ref	feature	gene	4514	6370	.	+	.	gene_name=NS3
+ref	feature	gene	6371	6751	.	+	.	gene_name=NS4A
+ref	feature	gene	6752	6820	.	+	.	gene_name=2K
+ref	feature	gene	6821	7564	.	+	.	gene_name=NS4B
+ref	feature	gene	7565	10264	.	+	.	gene_name=NS5

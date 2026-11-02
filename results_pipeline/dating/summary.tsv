@@ -1,0 +1,9 @@
+dataset	quantity	value	lower	upper	n
+wg	tMRCA Bangladeshi 3I_A.2 (the persisting lineage)	2016.337345588548	2015.8626120802726	2016.8198298546624	26
+wg	tMRCA Bangladeshi 3III_A (the 2021 incursion)	2021.5858656978196	2021.5102732397809	2021.6596841342089	18
+wg	introductions (region)	2.0			1
+wg	introductions (country)	2.0			1
+eg	tMRCA Bangladeshi 3I_A.2 (the persisting lineage)	2013.1883717926298	2011.353140430516	2015.3613857884257	184
+eg	tMRCA Bangladeshi 3III_A (the 2021 incursion)	2021.5876085806924	2021.4388540922964	2021.6140833798715	18
+eg	introductions (region)	2.0			2
+eg	introductions (country)	2.0			1

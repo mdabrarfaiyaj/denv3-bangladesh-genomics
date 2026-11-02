@@ -1,0 +1,18 @@
+accession	country	division	date	date_precision	year	length	completeness	host	release_date	submitter_affiliation
+BD2017_0	Bangladesh	Dhaka	2017-07-15	day	2017	10707	COMPLETE	Homo sapiens	2026-01-01	Test Lab
+BD2017_1	Bangladesh	Dhaka	2017-07-15	day	2017	10707	COMPLETE	Homo sapiens	2026-01-01	Test Lab
+BD2017_2	Bangladesh	Dhaka	2017-07-15	day	2017	10707	COMPLETE	Homo sapiens	2026-01-01	Test Lab
+BD2019_0	Bangladesh	Dhaka	2019-08-10	day	2019	10707	COMPLETE	Homo sapiens	2026-01-01	Test Lab
+BD2019_1	Bangladesh	Dhaka	2019-08-10	day	2019	10707	COMPLETE	Homo sapiens	2026-01-01	Test Lab
+BD2019_2	Bangladesh	Dhaka	2019-08-10	day	2019	10707	COMPLETE	Homo sapiens	2026-01-01	Test Lab
+BD2019_3	Bangladesh	Dhaka	2019-08-10	day	2019	10707	COMPLETE	Homo sapiens	2026-01-01	Test Lab
+BD2025_0	Bangladesh	Dhaka	2025-11-20	day	2025	10707	COMPLETE	Homo sapiens	2026-01-01	Test Lab
+BD2025_1	Bangladesh	Dhaka	2025-11-20	day	2025	10707	COMPLETE	Homo sapiens	2026-01-01	Test Lab
+BD2025_2	Bangladesh	Dhaka	2025-11-20	day	2025	10707	COMPLETE	Homo sapiens	2026-01-01	Test Lab
+BD2021_0	Bangladesh	Dhaka	2021-08	month	2021	10707	COMPLETE	Homo sapiens	2026-01-01	Test Lab
+BD2021_1	Bangladesh	Dhaka	2021-08	month	2021	10707	COMPLETE	Homo sapiens	2026-01-01	Test Lab
+CTX_0	Indonesia		2016	year	2016	10707	COMPLETE	Homo sapiens	2026-01-01	Test Lab
+CTX_1	Indonesia		2016	year	2016	10707	COMPLETE	Homo sapiens	2026-01-01	Test Lab
+CTX_2	Indonesia		2016	year	2016	10707	COMPLETE	Homo sapiens	2026-01-01	Test Lab
+OG_0	Thailand		2005	year	2005	10707	COMPLETE	Homo sapiens	2026-01-01	Test Lab
+OG_1	Thailand		2005	year	2005	10707	COMPLETE	Homo sapiens	2026-01-01	Test Lab

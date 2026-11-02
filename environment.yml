@@ -1,0 +1,16 @@
+name: denv3
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.11
+  - pandas
+  - biopython
+  - matplotlib
+  - ncbi-datasets-cli
+  - nextclade
+  - mafft
+  - iqtree
+  - treetime
+  - nextflow
+  - pytest

@@ -1,0 +1,4 @@
+position	ref_residue_genotypeIII	n_covered	n_blind	n_reference_state	pct_reference_state	majority_state	pct_majority_state	n_distinct_states	states
+NS5:52	H	3672	6143	3631	98.88	H	98.88	3	H=3631; R=40; K=1
+NS5:139	K	3672	6143	3642	99.18	K	99.18	2	K=3642; R=30
+NS5:404	T	3757	6058	3722	99.07	T	99.07	4	T=3722; A=33; S=1; P=1

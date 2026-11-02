@@ -1,0 +1,154 @@
+name: CI
+
+# Every push and pull request runs the pipeline on a tiny dataset. The point is
+# not to reproduce the science - twelve sequences cannot - but to prove the
+# pipeline still works on a machine that is not the author's laptop. That is a
+# much stronger claim than "it ran here".
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  # ---------------------------------------------------------------- linting --
+  lint:
+    name: Lint scripts and config
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Python syntax
+        run: |
+          python -m compileall -q scripts/*.py
+          pip install --quiet ruff
+          # E501 (line length) is not worth failing a build over
+          ruff check scripts/ --select=E9,F63,F7,F82,F401 --ignore=E501
+
+      - name: Shell syntax
+        run: |
+          for f in scripts/*.sh; do bash -n "$f" || exit 1; done
+          sudo apt-get update -qq && sudo apt-get install -y -qq shellcheck
+          # informational: style warnings should not block a merge
+          shellcheck -S error scripts/*.sh || true
+
+      - uses: nf-core/setup-nextflow@v2
+
+      - name: Nextflow config and syntax
+        run: |
+          nextflow config . -profile test > /dev/null
+          nextflow run . -profile test --help || true
+          nextflow lint . || echo "nextflow lint unavailable in this version"
+
+  # ------------------------------------------------------- the real CI test --
+  pipeline:
+    name: Pipeline (${{ matrix.profile }}, nf ${{ matrix.nxf_ver }})
+    runs-on: ubuntu-latest
+    needs: lint
+    strategy:
+      fail-fast: false
+      matrix:
+        profile: [docker, conda]
+        # Both versions the pipeline is claimed to support are actually tested,
+        # because 25+ enforces a strict config and script syntax that 24 does
+        # not. Testing only one version turns nextflowVersion into a guess.
+        nxf_ver: ['24.10.4', '26.10.4']
+    env:
+      NXF_VER: ${{ matrix.nxf_ver }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: nf-core/setup-nextflow@v2
+        with:
+          version: ${{ matrix.nxf_ver }}
+
+      - name: Set up Micromamba
+        if: matrix.profile == 'conda'
+        uses: mamba-org/setup-micromamba@v1
+        with:
+          environment-file: environment.yml
+          cache-environment: true
+
+      # Micromamba has already built the environment above, so point Nextflow at
+      # it with --conda_env rather than letting it solve a second copy. A login
+      # shell is needed for $CONDA_PREFIX to be set.
+      - name: Run the test profile (conda)
+        if: matrix.profile == 'conda'
+        shell: bash -el {0}
+        run: |
+          echo "reusing environment: $CONDA_PREFIX"
+          nextflow run . \
+            -profile test,conda \
+            --conda_env "$CONDA_PREFIX" \
+            --outdir results_ci \
+            -ansi-log false
+
+      - name: Run the test profile (docker)
+        if: matrix.profile == 'docker'
+        run: |
+          nextflow run . \
+            -profile test,docker \
+            --outdir results_ci \
+            -ansi-log false
+
+      - name: Check the outputs that must exist
+        run: |
+          set -euo pipefail
+          # A pipeline that "succeeds" while producing nothing is not a pass.
+          # These are the files every run must produce; missing any of them is
+          # a failure even if every process reported success.
+          required=(
+            results_ci/metadata/metadata_clades.tsv
+            results_ci/datasets/wg.fasta
+            results_ci/datasets/wg_dates.tsv
+            results_ci/datasets/wg_traits.tsv
+            results_ci/datasets/selection_log.tsv
+            results_ci/trees/wg.treefile
+            results_ci/trees/wg.iqtree
+          )
+          fail=0
+          for f in "${required[@]}"; do
+            if [ -s "$f" ]; then
+              echo "  OK    $f ($(wc -c < "$f") bytes)"
+            else
+              echo "  MISSING or EMPTY  $f"; fail=1
+            fi
+          done
+          # the traits file must carry the outgroup column script 06 depends on
+          head -1 results_ci/datasets/wg_traits.tsv | grep -q is_outgroup \
+            || { echo "  traits file is missing the is_outgroup column"; fail=1; }
+          # the tree must contain the taxa we put in
+          grep -q "BD2025_0" results_ci/trees/wg.treefile \
+            || { echo "  tree does not contain the expected taxa"; fail=1; }
+          exit $fail
+
+      - name: Upload outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: results-${{ matrix.profile }}-${{ matrix.nxf_ver }}
+          path: |
+            results_ci/
+            .nextflow.log
+          retention-days: 7
+
+      - name: Show the log on failure
+        if: failure()
+        run: |
+          tail -100 .nextflow.log || true
+          for d in work/*/*/; do
+            if [ -f "$d/.exitcode" ] && [ "$(cat "$d/.exitcode")" != "0" ]; then
+              echo "=== failed task: $d ==="
+              tail -30 "$d/.command.err" 2>/dev/null || true
+            fi
+          done

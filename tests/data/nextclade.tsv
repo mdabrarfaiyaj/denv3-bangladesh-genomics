@@ -1,0 +1,18 @@
+seqName	clade	qc.overallScore	qc.overallStatus	alignmentStart	alignmentEnd	totalMissing	totalSubstitutions	totalNonACGTNs	qc.frameShifts.status	qc.stopCodons.status	aaSubstitutions	unknownAaRanges	missing	coverage	cdsCoverage
+BD2017_0 test sequence	3I_A.2	1	good	1	10707	0	30	0	good	good	E:Y132H,NS5:K12R			1.0	E:1,prM:1,NS5:1
+BD2017_1 test sequence	3I_A.2	1	good	1	10707	0	30	0	good	good	E:Y132H,NS5:K12R			1.0	E:1,prM:1,NS5:1
+BD2017_2 test sequence	3I_A.2	1	good	1	10707	0	30	0	good	good	E:Y132H,NS5:K12R			1.0	E:1,prM:1,NS5:1
+BD2019_0 test sequence	3I_A.2	1	good	1	10707	0	30	0	good	good	E:Y132H,NS5:K12R			1.0	E:1,prM:1,NS5:1
+BD2019_1 test sequence	3I_A.2	1	good	1	10707	0	30	0	good	good	E:Y132H,NS5:K12R			1.0	E:1,prM:1,NS5:1
+BD2019_2 test sequence	3I_A.2	1	good	1	10707	0	30	0	good	good	E:Y132H,NS5:K12R			1.0	E:1,prM:1,NS5:1
+BD2019_3 test sequence	3I_A.2	1	good	1	10707	0	30	0	good	good	E:Y132H,NS5:K12R			1.0	E:1,prM:1,NS5:1
+BD2025_0 test sequence	3I_A.2	1	good	1	10707	0	30	0	good	good	E:Y132H,NS5:K12R			1.0	E:1,prM:1,NS5:1
+BD2025_1 test sequence	3I_A.2	1	good	1	10707	0	30	0	good	good	E:Y132H,NS5:K12R			1.0	E:1,prM:1,NS5:1
+BD2025_2 test sequence	3I_A.2	1	good	1	10707	0	30	0	good	good	E:Y132H,NS5:K12R			1.0	E:1,prM:1,NS5:1
+BD2021_0 test sequence	3III_A	1	good	1	10707	0	30	0	good	good				1.0	E:1,prM:1,NS5:1
+BD2021_1 test sequence	3III_A	1	good	1	10707	0	30	0	good	good				1.0	E:1,prM:1,NS5:1
+CTX_0 test sequence	3I_A	1	good	1	10707	0	30	0	good	good	NS5:Q77H			1.0	E:1,prM:1,NS5:1
+CTX_1 test sequence	3I_A	1	good	1	10707	0	30	0	good	good	NS5:Q77H			1.0	E:1,prM:1,NS5:1
+CTX_2 test sequence	3I_A	1	good	1	10707	0	30	0	good	good	NS5:Q77H			1.0	E:1,prM:1,NS5:1
+OG_0 test sequence	3II_B	1	good	1	10707	0	30	0	good	good				1.0	E:1,prM:1,NS5:1
+OG_1 test sequence	3II_B	1	good	1	10707	0	30	0	good	good				1.0	E:1,prM:1,NS5:1

@@ -1,0 +1,19 @@
+data/raw/
+data/structures/
+work/
+.nextflow*
+test_run/
+results_test/
+results_ci/
+results_pipeline/
+*Zone.Identifier
+scripts/.Rhistory
+
+# results are large; keep only the figures and tables the README cites
+results/*
+!results/figures/
+!results/structure/
+
+# kept as evidence of independent reproduction
+!results_pipeline/dating/summary.tsv
+!results_pipeline/trees/wg.iqtree

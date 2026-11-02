@@ -93,6 +93,12 @@ jobs:
             --outdir results_ci \
             -ansi-log false
 
+      - name: Verify containers have the modules the scripts import
+        if: matrix.profile == 'docker'
+        run: |
+          docker run --rm quay.io/biocontainers/treetime:0.11.4--pyh7cba7a3_0 \
+            python -c "import pandas, numpy, Bio; print('pandas', pandas.__version__, '| biopython', Bio.__version__)"
+
       - name: Run the test profile (docker)
         if: matrix.profile == 'docker'
         run: |
